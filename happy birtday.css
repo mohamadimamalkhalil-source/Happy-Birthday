@@ -25,3 +25,33 @@ p > a:first-of-type {
 body {
   overflow: hidden;
 }
+
+/* NEW: Style for the Birthday Cake Image */
+#birthdayCake {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed for distance from bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Precisely center horizontally */
+  max-width: 200px; /* Adjust size as needed, e.g., 250px, 300px */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 10; /* Make sure it's above the canvas if needed */
+}
+
+/* NEW: Style for the Song Lyrics */
+#songLyrics {
+  position: absolute;
+  top: 10%; /* Adjust as needed for vertical position. 10% from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFD700; /* Gold color, change to any color you like */
+  font-family: 'Comic Sans MS', cursive; /* A fun font, or use 'Verdana' like your other text */
+  font-size: 24px; /* Adjust font size */
+  text-align: center;
+  line-height: 1.5; /* Spacing between lines */
+  z-index: 20; /* Make sure it's above everything else */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for readability */
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Subtle glow */
+  max-width: 80%; /* Limit width to prevent lines from being too long */
+}
