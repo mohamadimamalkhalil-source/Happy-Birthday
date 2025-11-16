@@ -1,4 +1,3 @@
-/* Base styles from your original file */
 canvas {
   position: absolute;
   top: 0;
@@ -24,27 +23,36 @@ p > a:first-of-type {
   font-size: 20px;
 }
 body {
-  overflow: hidden; /* Prevents scrollbars if content overflows viewport */
+  overflow: hidden;
 }
 
-/* Style for the Song Lyrics */
+/* NEW: Style for the Birthday Cake Image */
+#birthdayCake {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed for distance from bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Precisely center horizontally */
+  max-width: 200px; /* Adjust size as needed, e.g., 250px, 300px */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 10; /* Make sure it's above the canvas if needed */
+}
+
+/* NEW: Style for the Song Lyrics */
 #songLyrics {
   position: absolute;
-  top: 10%; /* Distance from the top of the viewport */
-  left: 50%; /* Start at the horizontal center */
-  transform: translateX(-50%); /* Shift left by half its width to truly center it */
-  color: #FFD700; /* Gold text color, feel free to change */
-  font-family: 'Comic Sans MS', cursive; /* Playful font, falls back to generic cursive */
-  font-size: 28px; /* Larger font size for readability */
-  text-align: center; /* Center text within its own div */
-  line-height: 1.6; /* Spacing between lines of text */
-  z-index: 20; /* Ensures lyrics appear above the canvas */
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for better contrast */
-  padding: 20px 40px; /* Padding around the text */
-  border-radius: 15px; /* Slightly rounded corners for the background box */
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Soft white glow effect */
-  max-width: 70%; /* Limits the width of the text block to prevent lines from being too long on wide screens */
-  min-width: 300px; /* Ensures a minimum width on very narrow screens */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  top: 10%; /* Adjust as needed for vertical position. 10% from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFD700; /* Gold color, change to any color you like */
+  font-family: 'Comic Sans MS', cursive; /* A fun font, or use 'Verdana' like your other text */
+  font-size: 24px; /* Adjust font size */
+  text-align: center;
+  line-height: 1.5; /* Spacing between lines */
+  z-index: 20; /* Make sure it's above everything else */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for readability */
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Subtle glow */
+  max-width: 80%; /* Limit width to prevent lines from being too long */
 }
 
