@@ -422,7 +422,8 @@ calc = {
     opts.charSpacing *
     Math.max(
       opts.strings[0] ? opts.strings[0].length : 0, // Handle empty strings defensively
-      opts.strings[1] ? opts.strings[1].length : 0
+      opts.strings[1] ? opts.strings[1].length : 0,
+      opts.strings[2] ? opts.strings[2].length : 0 // Added check for potential third line
     ),
 };
 
