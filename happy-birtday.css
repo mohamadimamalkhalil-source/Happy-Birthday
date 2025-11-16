@@ -27,18 +27,7 @@ body {
   overflow: hidden; /* Prevents scrollbars if content overflows viewport */
 }
 
-/* NEW: Style for the Birthday Cake Image */
-#birthdayCake {
-  position: absolute;
-  bottom: 20px; /* Distance from the bottom of the viewport */
-  left: 50%; /* Start at the horizontal center */
-  transform: translateX(-50%); /* Shift left by half its width to truly center it */
-  max-width: 250px; /* Adjust cake size as desired */
-  height: auto; /* Maintain image aspect ratio */
-  z-index: 10; /* Ensures the cake appears above the canvas animation */
-}
-
-/* NEW: Style for the Song Lyrics */
+/* Style for the Song Lyrics */
 #songLyrics {
   position: absolute;
   top: 10%; /* Distance from the top of the viewport */
@@ -49,7 +38,7 @@ body {
   font-size: 28px; /* Larger font size for readability */
   text-align: center; /* Center text within its own div */
   line-height: 1.6; /* Spacing between lines of text */
-  z-index: 20; /* Ensures lyrics appear above both canvas and cake */
+  z-index: 20; /* Ensures lyrics appear above the canvas */
   background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for better contrast */
   padding: 20px 40px; /* Padding around the text */
   border-radius: 15px; /* Slightly rounded corners for the background box */
@@ -58,3 +47,4 @@ body {
   min-width: 300px; /* Ensures a minimum width on very narrow screens */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
+
