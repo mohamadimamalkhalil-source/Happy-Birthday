@@ -2,59 +2,24 @@ let w = (c.width = window.innerWidth),
   h = (c.height = window.innerHeight),
   ctx = c.getContext("2d"),
   hw = w / 2;
-(hh = h / 2),
-  (opts = {
-    // change the text in here //
-    strings: ["HAPPY", "BIRTHDAY!", "to You"],
-    charSize: 30,
-    charSpacing: 35,
-    lineHeight: 40,
 
-    cx: w / 2,
-    cy: h / 2,
+// --- NEW CODE ADDED HERE ---
+const correctName = "Amaya"; // The correct name to unlock the animation
+const wrongNames = ["Sara", "Christina"]; // Names that trigger a "wrong name" message
+let attempts = 0; // To track how many incorrect attempts have been made
+const maxWrongAttempts = wrongNames.length; // Max wrong names before allowing the correct one
+// --- END NEW CODE ---
 
-    fireworkPrevPoints: 10,
-    fireworkBaseLineWidth: 5,
-    fireworkAddedLineWidth: 8,
-    fireworkSpawnTime: 200,
-    fireworkBaseReachTime: 30,
-    fireworkAddedReachTime: 30,
-    fireworkCircleBaseSize: 20,
-    fireworkCircleAddedSize: 10,
-    fireworkCircleBaseTime: 30,
-    fireworkCircleAddedTime: 30,
-    fireworkCircleFadeBaseTime: 10,
-    fireworkCircleFadeAddedTime: 5,
-    fireworkBaseShards: 5,
-    fireworkAddedShards: 5,
-    fireworkShardPrevPoints: 3,
-    fireworkShardBaseVel: 4,
-    fireworkShardAddedVel: 2,
-    fireworkShardBaseSize: 3,
-    fireworkShardAddedSize: 3,
-    gravity: 0.1,
-    upFlow: -0.1,
-    letterContemplatingWaitTime: 360,
-    balloonSpawnTime: 20,
-    balloonBaseInflateTime: 10,
-    balloonAddedInflateTime: 10,
-    balloonBaseSize: 20,
-    balloonAddedSize: 20,
-    balloonBaseVel: 0.4,
-    balloonAddedVel: 0.4,
-    balloonBaseRadian: -(Math.PI / 2 - 0.5),
-    balloonAddedRadian: -1,
-  }),
-  (calc = {
-    totalWidth:
-      opts.charSpacing *
-      Math.max(opts.strings[0].length, opts.strings[1].length),
-  }),
-  (Tau = Math.PI * 2),
-  (TauQuarter = Tau / 4),
-  (letters = []);
+(hh = h / 2); // 'opts' definition moved to after name input
 
-ctx.font = opts.charSize + "px Verdana";
+let opts, calc, Tau, TauQuarter, letters; // Declare these variables here
+
+Tau = Math.PI * 2;
+TauQuarter = Tau / 4;
+letters = [];
+
+// ctx.font will be set after opts is defined
+// ctx.font = opts.charSize + "px Verdana"; // This line is moved later
 
 function Letter(char, x, y) {
   this.char = char;
@@ -353,6 +318,37 @@ function generateBalloonPath(x, y, size) {
   ctx.bezierCurveTo(x + size / 4, y - size, x + size / 2, y - size / 2, x, y);
 }
 
+// --- NEW FUNCTION ADDED HERE ---
+function askForName() {
+  let enteredName = "";
+  let currentAttempt = 0; // Tracks which "wrongName" to check against
+
+  while (enteredName !== correctName) {
+    let promptMessage = "Today is the Birthday of the sweetest girl, enter her name?";
+    enteredName = window.prompt(promptMessage);
+
+    // If user cancels prompt, treat as empty string or handle specifically
+    if (enteredName === null) {
+      enteredName = ""; // Or you can break out, but for this logic, re-prompt is better
+    } else {
+      enteredName = enteredName.trim(); // Clean up whitespace
+    }
+
+    if (enteredName === correctName) {
+      break; // Correct name, exit the loop
+    } else if (currentAttempt < maxWrongAttempts && enteredName.toLowerCase() === wrongNames[currentAttempt].toLowerCase()) {
+      // If it matches one of the expected wrong names in sequence (case-insensitive)
+      window.alert("Wrong Name, enter the right name please?");
+      currentAttempt++;
+    } else {
+      // Any other incorrect name, or if we've passed the expected wrong names sequence
+      window.alert("Wrong Name, enter the right name please?");
+    }
+  }
+  return enteredName; // Return the correct name
+}
+// --- END NEW FUNCTION ---
+
 function anim() {
   window.requestAnimationFrame(anim);
 
@@ -372,6 +368,67 @@ function anim() {
   if (done) for (var l = 0; l < letters.length; ++l) letters[l].reset();
 }
 
+// --- REPLACED ANIMATION STARTUP CODE WITH THIS ---
+// First, ask for the name
+const receivedName = askForName();
+
+// Now that we have the correct name, define opts and initialize 'calc'
+opts = {
+  // Personalized message including the entered name
+  strings: ["HAPPY", "BIRTHDAY!", receivedName + "!"], 
+  charSize: 30,
+  charSpacing: 35,
+  lineHeight: 40,
+
+  cx: w / 2,
+  cy: h / 2,
+
+  fireworkPrevPoints: 10,
+  fireworkBaseLineWidth: 5,
+  fireworkAddedLineWidth: 8,
+  fireworkSpawnTime: 200,
+  fireworkBaseReachTime: 30,
+  fireworkAddedReachTime: 30,
+  fireworkCircleBaseSize: 20,
+  fireworkCircleAddedSize: 10,
+  fireworkCircleBaseTime: 30,
+  fireworkCircleAddedTime: 30,
+  fireworkCircleFadeBaseTime: 10,
+  fireworkCircleFadeAddedTime: 5,
+  fireworkBaseShards: 5,
+  fireworkAddedShards: 5,
+  fireworkShardPrevPoints: 3,
+  fireworkShardBaseVel: 4,
+  fireworkShardAddedVel: 2,
+  fireworkShardBaseSize: 3,
+  fireworkShardAddedSize: 3,
+  gravity: 0.1,
+  upFlow: -0.1,
+  letterContemplatingWaitTime: 360,
+  balloonSpawnTime: 20,
+  balloonBaseInflateTime: 10,
+  balloonAddedInflateTime: 10,
+  balloonBaseSize: 20,
+  balloonAddedSize: 20,
+  balloonBaseVel: 0.4,
+  balloonAddedVel: 0.4,
+  balloonBaseRadian: -(Math.PI / 2 - 0.5),
+  balloonAddedRadian: -1,
+};
+
+// Initialize calc after opts is defined
+calc = {
+  totalWidth:
+    opts.charSpacing *
+    Math.max(
+      opts.strings[0] ? opts.strings[0].length : 0, // Handle empty strings defensively
+      opts.strings[1] ? opts.strings[1].length : 0
+    ),
+};
+
+
+ctx.font = opts.charSize + "px Verdana";
+
 for (let i = 0; i < opts.strings.length; ++i) {
   for (var j = 0; j < opts.strings[i].length; ++j) {
     letters.push(
@@ -388,7 +445,9 @@ for (let i = 0; i < opts.strings.length; ++i) {
   }
 }
 
+// Finally, start the animation
 anim();
+// --- END REPLACEMENT ---
 
 window.addEventListener("resize", function () {
   w = c.width = window.innerWidth;
@@ -397,5 +456,9 @@ window.addEventListener("resize", function () {
   hw = w / 2;
   hh = h / 2;
 
-  ctx.font = opts.charSize + "px Verdana";
+  // Make sure opts is defined before trying to access its properties
+  if (opts && opts.charSize) {
+    ctx.font = opts.charSize + "px Verdana";
+  }
 });
+
